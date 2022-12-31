@@ -9,16 +9,14 @@ class Solution {
         for(int i=m-1;i>=0;i--){
             if(obstacleGrid[i][n-1] == 0){
                 dp[i][n-1] = 1;
-            } else if(obstacleGrid[i][n-1] == 1){
-                dp[i][n-1] = 0;
+            } else {
                 break;
             }           
         }
         for(int i=n-1;i>=0;i--){
             if(obstacleGrid[m-1][i] == 0){
                 dp[m-1][i] = 1;
-            } else if(obstacleGrid[m-1][i] == 1){
-                dp[m-1][i] = 0;
+            } else {
                 break;
             }
         }
@@ -26,7 +24,7 @@ class Solution {
             for(int j=n-2;j>=0;j--){
                 if(obstacleGrid[i][j] == 0){
                     dp[i][j] = dp[i+1][j] + dp[i][j+1];
-                } else if(obstacleGrid[i][j] == 1){
+                } else {
                      dp[i][j] = 0;
                 }
             }
