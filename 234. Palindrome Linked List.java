@@ -28,3 +28,42 @@ class Solution {
         return true;
     }
 }
+
+
+// Better solution
+
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode last = reverseList(slow); 
+        ListNode start = head;
+        while(last != null){
+            if(start.val != last.val){
+                return false;
+            }
+            start = start.next;
+            last = last.next;
+        } 
+        return true;      
+    }
+    public ListNode reverseList(ListNode mid) {
+        ListNode temp = mid;
+        ListNode prev = null;
+        while(mid != null){
+            mid = mid.next;
+            temp.next = prev;
+            prev = temp;
+            temp = mid;
+        }
+        return prev;
+    }
+}
