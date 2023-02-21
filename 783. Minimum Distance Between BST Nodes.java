@@ -14,7 +14,7 @@
  * }
  */
 
-// Not optimal Soultion O(n2) TC and extra space of  o(n)
+// Not optimal Soultion O(n) TC and extra space of  o(n)
 class Solution {
     public int minDiffInBST(TreeNode root) {
         int min = Integer.MAX_VALUE;
