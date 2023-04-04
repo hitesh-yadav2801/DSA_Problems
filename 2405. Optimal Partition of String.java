@@ -1,0 +1,17 @@
+class Solution {
+    public int partitionString(String s) {
+        HashSet<Character> set = new HashSet<>();
+        int ans = 1;
+        for (int i = 0; i < s.length(); i++){
+            char key = s.charAt(i);
+            if(set.contains(key)){
+                ans++;
+                boolean flag = set.removeAll(set);
+                set.add(key);
+            } else {
+                set.add(key);
+            }
+        }
+        return ans;
+    }
+}
