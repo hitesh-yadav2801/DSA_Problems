@@ -30,3 +30,36 @@ class Solution
         return res/10;
     }
 }
+
+// using reverse function
+
+class Solution
+{
+    public static Node addOne(Node head) 
+    { 
+        Node revHead = reverse(head);
+        Node temp = revHead, prev = null;
+        int carry = 1;
+        while(temp != null){
+            int sum = temp.data + carry;
+            temp.data = sum % 10;
+            carry = sum / 10;
+            prev = temp;
+            temp = temp.next;
+        }
+        if(carry != 0){
+            prev.next = new Node(carry);
+        }
+        return reverse(revHead);
+    }
+    public static Node reverse(Node head){
+        Node temp = head, prev = null;
+        while(head != null){
+            head = head.next;
+            temp.next = prev;
+            prev = temp;
+            temp = head;
+        }
+        return prev;
+    }
+}
