@@ -14,3 +14,28 @@ class Solution {
         return 0;
     }
 }
+
+// without using extra space. slow and fast pointer method
+
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution{
+    public static int findDuplicate(ArrayList<Integer> arr, int n){
+        int slow = arr.get(0);
+        int fast = arr.get(0);
+        do{
+            slow = arr.get(slow);
+            fast = arr.get(arr.get(fast));
+        } while(slow != fast);
+        fast = arr.get(0);
+        while(slow != fast){
+            slow = arr.get(slow);
+            fast = arr.get(fast);
+        }
+        return slow;
+    }
+}
+
