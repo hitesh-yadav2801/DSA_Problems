@@ -12,3 +12,17 @@ class Solution {
         return expectedSum - sum;
     }
 }
+
+// Using Bit Manipulation
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        int missing = 0;
+        for(int i = 0; i < n; i++){
+            missing ^= i ^ nums[i];
+        }
+        missing ^= n;
+        return missing;
+    }
+}
