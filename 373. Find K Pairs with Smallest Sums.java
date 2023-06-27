@@ -52,3 +52,38 @@ class Solution {
         return ans; 
     } 
 }
+
+
+// Optimized Approach
+
+class Solution {
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        int m = nums1.length;
+        int n = nums2.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        Set<String> vis = new HashSet<>();
+        int sum = nums1[0] + nums2[0];
+        pq.offer(new int[]{sum, 0, 0});
+        vis.add(0 + "-" + 0);
+
+        while (k-- > 0 && !pq.isEmpty()) {
+            int[] temp = pq.peek();
+            pq.poll();
+            int i = temp[1];
+            int j = temp[2];
+            ans.add(List.of(nums1[i], nums2[j]));
+
+            if (j + 1 < n && !vis.contains(i + "-" + (j + 1))) {
+                pq.offer(new int[]{nums1[i] + nums2[j + 1], i, j + 1});
+                vis.add(i + "-" + (j + 1));
+            }
+            if (i + 1 < m && !vis.contains((i + 1) + "-" + j)) {
+                pq.offer(new int[]{nums1[i + 1] + nums2[j], i + 1, j});
+                vis.add((i + 1) + "-" + j);
+            }
+        }
+
+        return ans;
+    }
+}
