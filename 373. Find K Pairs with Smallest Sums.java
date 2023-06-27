@@ -1,4 +1,4 @@
-// Brute force 
+// Brute force  TLE
 
 class Solution {
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
@@ -18,5 +18,37 @@ class Solution {
             ans.add(temp);
         }
         return ans;
+    } 
+}
+
+
+// Small Optimization
+
+class Solution {
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        List<List<Integer>> ans = new ArrayList<>();
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        for(int i = 0; i < nums1.length; i++){
+            for(int j = 0; j < nums2.length; j++){
+                int sum = nums1[i] + nums2[j];
+                if(pq.size() < k){
+                    pq.offer(new int[]{sum, nums1[i], nums2[j]});
+                } else if(pq.peek()[0] > sum){
+                    pq.poll();
+                    pq.offer(new int[]{sum, nums1[i], nums2[j]});
+                } else {
+                    break;
+                }
+            }
+        }
+        while(!pq.isEmpty()){
+            List<Integer> temp = new ArrayList<>();
+            int[] arr = pq.peek();
+            temp.add(arr[1]);
+            temp.add(arr[2]);
+            pq.poll();
+            ans.add(temp);
+        }
+        return ans; 
     } 
 }
