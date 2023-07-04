@@ -15,3 +15,23 @@ class Solution {
         return -1;
     }
 }
+
+// using bit manipulation in constant extra space
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ans = 0;
+        for(int k = 0; k < 32; k++){
+            int temp = 1 << k;
+            int zeros = 0, ones = 0;
+            for(int num : nums){
+                if((num & temp) == 0) zeros++;
+                else ones++;
+            }
+            if(ones % 3 == 1){
+                ans = ans | (1 << k);
+            }
+        } 
+        return ans;
+    }
+}
