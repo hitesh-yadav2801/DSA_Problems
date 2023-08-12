@@ -1,3 +1,30 @@
+// Recursion + memo
+
+class Solution {
+    int m , n;
+    Integer[][] dp;
+    public int uniquePathsWithObstacles(int[][] grid) {
+        m = grid.length;
+        n = grid[0].length;
+        dp = new Integer[m][n];
+        return solve(grid, 0, 0);
+    }
+    private int solve(int[][] grid, int i, int j){
+        if(i >= m || j >= n || grid[i][j] == 1) return 0;
+        if(i == m - 1 && j == n - 1) return 1;
+
+        if(dp[i][j] != null){
+            return dp[i][j];
+        }
+        int path1 = solve(grid, i + 1, j);
+        int path2 = solve(grid, i, j + 1);
+
+        return dp[i][j] = path1 + path2;
+    }
+}
+
+// Tabulation
+
 class Solution {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int m = obstacleGrid.length;
