@@ -10,7 +10,27 @@ class Solution {
     }
 }
 
-// using dp
+// Using memo
+
+class Solution {
+    Integer[] dp;
+    public int climbStairs(int n) {
+        dp = new Integer[n + 1];
+        return rec(n);
+    }
+    int rec(int n){
+        if(n == 1) return 1;
+        if(n == 2) return 2;
+
+        if(dp[n] != null){
+            return dp[n];
+        }
+        
+        return dp[n] = rec(n - 1) + rec(n - 2);
+    }
+}
+
+// using dp tabulation
 
 class Solution {
     public int climbStairs(int n) {
