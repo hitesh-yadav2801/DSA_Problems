@@ -94,3 +94,39 @@ class Solution {
         return false;
     }
 }
+
+// BFS anothor approach using parent array 
+
+class Solution {
+    // Function to detect cycle in an undirected graph.
+    public boolean isCycle(int n, ArrayList<ArrayList<Integer>> adj) {
+        boolean[] vis = new boolean[n];
+        int[] parent = new int[n];
+        
+        for(int i = 0; i < n; i++){
+            if(!vis[i]){
+                if(bfs(adj, vis, i, parent)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    boolean bfs(ArrayList<ArrayList<Integer>> adj, boolean vis[], int curNode, int[] parent){
+        Queue<Integer> q = new LinkedList<>();
+        parent[curNode] = -1;
+        q.add(curNode);
+        
+        while(!q.isEmpty()){
+            int cur = q.poll();
+            vis[cur] = true;
+            for(int neighbour : adj.get(cur)){
+                if(neighbour == parent[cur]) continue;
+                if(vis[neighbour]) return true;
+                q.add(neighbour);
+                parent[neighbour] = cur;
+            }
+        }
+        return false;
+    }
+}
