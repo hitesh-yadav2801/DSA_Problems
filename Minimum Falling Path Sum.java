@@ -1,3 +1,35 @@
+// Recursion + memo
+
+class Solution {
+    Integer[][] dp;
+    public int minFallingPathSum(int[][] matrix) {
+        int col = matrix[0].length;
+        int ans = Integer.MAX_VALUE;
+        dp = new Integer[matrix.length][matrix[0].length];
+        for(int i = 0; i < col; i++){
+            ans = Math.min(ans, rec(matrix, 0, i, col));
+        }
+        return ans;
+    }
+    int rec(int[][] matrix, int row, int col, int n){
+        if(row == n) return 0;
+
+        if(col < 0 || col >= n) return Integer.MAX_VALUE;
+
+        if(dp[row][col] != null){
+            return dp[row][col];
+        }
+
+        int opt1 = rec(matrix, row + 1, col - 1, n);
+        int opt2 = rec(matrix, row + 1, col, n);
+        int opt3 = rec(matrix, row + 1, col + 1, n);
+
+        return dp[row][col] = matrix[row][col] + Math.min(opt1, Math.min(opt2, opt3));
+    }
+}
+
+// Bottom up
+
 class Solution {
     public int minFallingPathSum(int[][] matrix) {
         int n = matrix.length;
