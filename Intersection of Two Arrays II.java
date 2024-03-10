@@ -49,3 +49,27 @@ class Solution {
         return ans;
     }
 }
+
+
+// 
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        for(int num : nums1){
+            set.add(num);
+        }
+        List<Integer> temp = new ArrayList<>();
+        for(int i = 0; i < nums2.length; i++){
+            if(set.contains(nums2[i])){
+                temp.add(nums2[i]);
+                set.remove(nums2[i]);
+            }
+        }
+        int[] ans = new int[temp.size()];
+        for(int i = 0; i < temp.size(); i++){
+            ans[i] = temp.get(i);
+        }
+        return ans;
+    }
+}
