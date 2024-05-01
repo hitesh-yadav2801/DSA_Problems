@@ -12,3 +12,16 @@ class Solution {
         return s;
     }
 }
+
+
+// Another solution
+
+class Solution {
+    public String reversePrefix(String s, char ch) {
+        int i = s.indexOf(ch);
+        if(i != -1){
+            return new StringBuilder(s.substring(0, i + 1)).reverse().toString() + s.substring(i + 1); 
+        }
+        return s;
+    }
+}
