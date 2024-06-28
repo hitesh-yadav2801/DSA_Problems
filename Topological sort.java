@@ -1,3 +1,5 @@
+// Using DFS
+
 class Solution
 {
     //Function to return list containing vertices in Topological order. 
@@ -25,5 +27,49 @@ class Solution
             }
         }
         st.push(node);
+    }
+}
+
+
+
+// Using Kahn's Algo
+
+
+class Solution
+{
+    //Function to return list containing vertices in Topological order. 
+    static int[] topoSort(int n, ArrayList<ArrayList<Integer>> adj) 
+    {
+        int[] inDegree = new int[n];
+        
+        for(int i = 0; i < n; i++){
+            for(int child: adj.get(i)){
+                inDegree[child]++;
+            }
+        }
+        
+        Queue<Integer> q = new LinkedList<>();
+        int[] ans = new int[n];
+        
+        for(int i = 0; i < n; i++){
+            if(inDegree[i] == 0){
+                q.add(i);
+            }
+        }
+        
+        int idx = 0;
+        while(!q.isEmpty()){
+            int cur = q.poll();
+            ans[idx++] = cur;
+            
+            for(int child : adj.get(cur)){
+                inDegree[child]--;
+                if(inDegree[child] == 0){
+                    q.add(child);
+                }
+            }
+        }
+        
+        return ans;
     }
 }
