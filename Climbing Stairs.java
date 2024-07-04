@@ -1,4 +1,4 @@
-// Using recursion(not efficient)
+// Using recursion(not efficient)   ----> 2^n time and n space(due to recursion stack)
 
 class Solution {
     public int climbStairs(int n) {
@@ -42,5 +42,24 @@ class Solution {
           dp[i] = dp[i+1] + dp[i+2];
       }
       return dp[0];
+    }
+}
+
+
+// Most optimized ----> O(n) time and O(1) space
+
+
+class Solution {
+    public int climbStairs(int n) {
+        if(n <= 1) return 1;
+        int prev2 = 1;
+        int prev1 = 1;
+        int cur = 0;
+        for(int i = 2; i <= n; i++){
+            cur = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = cur;
+        }
+        return cur;
     }
 }
