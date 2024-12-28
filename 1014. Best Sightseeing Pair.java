@@ -1,3 +1,4 @@
+// O(n) TC and SC
 class Solution {
     public int maxScoreSightseeingPair(int[] values) {
         int n = values.length;
@@ -16,6 +17,24 @@ class Solution {
         }
         for(int i = 0; i < n - 1; i++){
             maxScore = Math.max(maxScore, sum[i] + minus[i+1]);
+        }
+        return maxScore;
+    }
+}
+
+
+// O(n) TC and O(1) SC
+
+class Solution {
+    public int maxScoreSightseeingPair(int[] values) {
+        int n = values.length;
+        int maxScore = 0;
+        int first = values[0] + 0;
+
+        for(int i = 1; i < n; i++){
+            int second = values[i] - i;
+            maxScore = Math.max(maxScore, first + second);
+            first = Math.max(first, values[i] + i);
         }
         return maxScore;
     }
